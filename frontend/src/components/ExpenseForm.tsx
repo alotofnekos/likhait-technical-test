@@ -7,7 +7,7 @@ import { ExpenseFormData } from "../types";
 import { TextField, SelectBox, Button, Modal } from "../vibes";
 import { useExpenseForm } from "../hooks/useExpenseForm";
 import { fetchCategories, createCategory } from "../services/api";
-
+import { formatDate } from "../utils/expenseUtils";
 interface ExpenseFormProps {
   initialData?: Partial<ExpenseFormData>;
   onSubmit: (data: ExpenseFormData) => Promise<void>;
@@ -115,6 +115,7 @@ export function ExpenseForm({
           label="Date"
           type="date"
           value={formData.date}
+          max={formatDate(new Date())}
           onChange={(e) => handleChange("date", e.target.value)}
           error={errors.date}
           fullWidth
